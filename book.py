@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 
-url ="http://books.toscrape.com/catalogue/we-love-you-charlie-freeman_954/index.html"
+url ="http://books.toscrape.com/catalogue/category/books_1/index.html"
 
 def download_book_page(url):
     """fonction de recuparation et de parsage de la page HTML
@@ -55,6 +55,6 @@ def scrap_book():
                 "number_available" : int(''.join([str(i) for i in result["Availability"] if i.isnumeric()])),
                 "product_description": soup.h2.find_next("p").text,
                 "category": soup.find("ul", class_="breadcrumb").find_all("a")[2].string,
-                "review_rating" : soup.find_all("p", class_="star-rating")[0]["class" ][1],
+                "review_rating" : soup.find_all("p", class_="star-rating")[0]["class"][1],
                 "image_url": img()}
     return dict_data
