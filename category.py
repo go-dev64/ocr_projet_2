@@ -10,14 +10,19 @@ from bs4 import BeautifulSoup
             
 """
 url ="http://books.toscrape.com/catalogue/category/books/sequential-art_5/page-2.html" 
-reponse = requests.get(url)
 
 
 
-soup = BeautifulSoup(reponse.content, "html.parser")
-links = soup.find('div', class_='row')
-links2 = links.find_all_next_("li")
-print(links)
+def page_links (links):
+    reponse = requests.get(url)
+    soup = BeautifulSoup(reponse.content, "html.parser")
+    soup_h3 = soup.find_all('h3')
+    for i in soup_h3:
+        links.append("http://books.toscrape.com/catalogue"+ i.find("a")['href'][8:])
+
+                            
+    
+    
 
 
 
