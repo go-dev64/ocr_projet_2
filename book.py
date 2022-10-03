@@ -1,8 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
+import category
 
 
-url ="https://books.toscrape.com/catalogue/category/books/travel_2/index.html"
+url ="https://books.toscrape.com/catalogue/category/books/fiction_10/index.html"
 
 def download_book_page(url):
     """fonction de recuparation et de parsage de la page HTML
@@ -13,10 +14,11 @@ def download_book_page(url):
     """
     reponse = requests.get(url)
     soup = BeautifulSoup(reponse.content, "html.parser")
-    return soup , reponse
+    return soup
 
-def scrap_book():
-    soup = download_book_page(url)[0]
+
+def scrap_book(url):
+    soup = download_book_page(url)
        
     def th():
         
@@ -58,3 +60,17 @@ def scrap_book():
                 "review_rating" : soup.find_all("p", class_="star-rating")[0]["class"][1],
                 "image_url": img()}
     return dict_data
+
+
+
+
+def all_books (url):
+    list_of_books = []
+    for book in category.get_all_links_of_all_pages(url):
+        list_of_books.append(scrap_book(book))
+        print(book)
+        
+    return list_of_books
+
+
+print(len(all_books(url = url)))
