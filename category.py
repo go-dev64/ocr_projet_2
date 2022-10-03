@@ -1,3 +1,4 @@
+from http.client import responses
 import book 
 import requests
 from bs4 import BeautifulSoup
@@ -9,58 +10,52 @@ from bs4 import BeautifulSoup
             = il faudra recuperer les liens de chasue page
             
 """
-url ="http://books.toscrape.com/catalogue/category/books/sequential-art_5/page-2.html" 
+url ="http://books.toscrape.com/catalogue/category/books/fiction_10/index.html" 
 
 
 
-def page_links (links):
+
+def soup(url):
+    """  realise une soup de la page html."""
     reponse = requests.get(url)
     soup = BeautifulSoup(reponse.content, "html.parser")
-    soup_h3 = soup.find_all('h3')
-    for i in soup_h3:
+    return soup , reponse
+
+
+def get_links_of_page(soupe):
+    """recupere tous les liens des livres d'une page.
+
+    Args:
+        Parsage d'une page html.
+
+    Returns:
+        une liste des liens des livres de la page html.
+    """
+    links = []   
+    for i in soupe.find_all('h3'):
         links.append("http://books.toscrape.com/catalogue"+ i.find("a")['href'][8:])
+    return links                     
+                               
+               
 
-                            
-    
-    
-
-
-
-
-
-"""
-
-url = book.url[:-10]
-print(url)
-list = []
-def all_links ():           
-    
+   
+def get_all_links (url): 
+    books_url = []      
+    url = url[:-10]
     x = 0
     reponse = requests.get(url)
-    while reponse.ok == True:
+    while reponse.ok:
         x += 1
         url_var = url + "page-" + str(x) + '.html'
-        reponse = requests.get(url_var)
-        if reponse.ok:
-            soup = BeautifulSoup(reponse.content, "html.parser")
-            links = soup.find
-            list.append(url_var)
-    
+        reponse = soup(url_var)[1]  
+        soup_url_var = soup(url_var)[0]
+        print(reponse)
+        if soup(url_var)[1].ok:
+           books_url.extend(get_links_of_page(soup_url_var))    
+            
+    return books_url
+      
         
-   
-    
-    
 
-    
-links()       
-  
-print(list)"""
-"""
-for i in range(1,6):
 
-    url_var = url + "page-" + str(i) + '.html'
-    reponse = requests.get(url_var)
-    if reponse.ok :
-        print ("ok")
-    else:
-        print(error)"""
+print(get_all_links(url))
