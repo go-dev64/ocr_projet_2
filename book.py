@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 
-url ="http://books.toscrape.com/catalogue/category/books_1/index.html"
+url ="https://books.toscrape.com/catalogue/category/books/travel_2/index.html"
 
 def download_book_page(url):
     """fonction de recuparation et de parsage de la page HTML
@@ -11,12 +11,12 @@ def download_book_page(url):
         Returns:
             : contenu de la page html en question
     """
-    page = requests.get(url)
-    soup = BeautifulSoup(page.content, "html.parser")
-    return soup
+    reponse = requests.get(url)
+    soup = BeautifulSoup(reponse.content, "html.parser")
+    return soup , reponse
 
 def scrap_book():
-    soup = download_book_page(url)
+    soup = download_book_page(url)[0]
        
     def th():
         
