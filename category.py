@@ -68,13 +68,18 @@ def get_all_links_of_all_pages (url):
     reponse = download_book_page(url_modifie + "page-1.html")[1]
     
     if reponse.ok:
+        """verifie si plusieurs pages sont disponible, et les parcours pour retourner les liens des livres de chaque pages"""
         all_books_url.extend(links_all_pages(url= url_modifie, reponse= download_book_page(url_modifie)[1]))
-               
-    else:  
+    
+    elif download_book_page(url)[0].find("ol", class_="row"):
+        """verifie si il y a des liens de livres sur la page et retournent tous les liens de cette page. """
         all_books_url.extend(get_links_of_page(soupe=download_book_page(url)[0]))
+        
+    else:   
+        """retournent le lien d'un livre""" 
+        all_books_url.append(url)
         
     return all_books_url   
         
         
-
         

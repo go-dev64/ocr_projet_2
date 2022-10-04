@@ -1,10 +1,14 @@
 import csv
 import book as b
 
+
+
 def export_csv():
-    """ creer un fichiers csv depuis le dict_ data du module book.py
+    """ creer un fichiers csv avec les data de chaque livre.
+        data_ book = b.all_books (b.url)
+        un fichiers csv par category
     """
-    list_of_books = b.all_books (b.url)
+     
     """Creation de l en-tete du fichiers csv"""
     en_tete = ["product_page_url", "universal_product_code",
             "title", "price_including_tax", "price_excluding_tax",
@@ -13,12 +17,12 @@ def export_csv():
 
     
     """ecriture du csv"""
-    with open ( list_of_books[0]["category"]+".csv", "w") as f:
+    with open ( b.all_books (b.url)[0]["category"]+".csv", "w") as f:
         
         writer = csv.writer(f, delimiter= ',')
         writer.writerow(en_tete)
         
-        for book in list_of_books:
+        for book in b.all_books (b.url):
                 ligne_book = [book["product_page_url"], book["upc"], book["title"],
                               book["price_including_tax"], book["price_excluding_tax"],
                               book["number_available"], book["product_description"], book["category"],
@@ -26,7 +30,7 @@ def export_csv():
                 
                 writer.writerow(ligne_book)
         
-        print("fichier csv creer")
+        print("Le fichier :" + b.all_books (b.url)[0]["category"]+ ".csv est créé ")
         
       
 export_csv()

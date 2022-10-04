@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import category
 
 
-url ="http://books.toscrape.com/catalogue/category/books/travel_2/index.html"
+url ="http://books.toscrape.com/catalogue/category/books/historical-fiction_4/index.html"
 
 def download_book_page(url):
     """fonction de recuparation et de parsage de la page HTML
@@ -68,9 +68,7 @@ def all_books (url):
     list_of_books = []
     for book in category.get_all_links_of_all_pages(url):
         list_of_books.append(scrap_book(book))
-        print(book)
         
     return list_of_books
 
 
-print(len(all_books(url = url)))
