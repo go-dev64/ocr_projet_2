@@ -19,25 +19,25 @@ def get_links_of_page(soupe):
                
 
 def links_all_pages(url, reponse):
+    
     """boucle sur toutes les pages disponibles pour la categorie ou sur le site et retourne un liste des liens des livres.
-
     Args:
         url des la categorie ou du site .
         reponse : reponse de la requette http (requests)
-
     Returns:
         une liste contenant tous les liens des livres. books_url
     """
     
-    books_url = []      
+    links_of_books_pages = []      
     x = 0
     while reponse.ok:
         x += 1
         url_var = url + "page-" + str(x) + '.html'
         reponse = utile.download_book_page(url_var)[1]  
-        books_url.extend(get_links_of_page(utile.download_book_page(url_var)[0]))    
+        links_of_books_pages.extend(get_links_of_page(utile.download_book_page(url_var)[0]))    
+        
                             
-    return books_url
+    return links_of_books_pages
 
 
 
@@ -66,6 +66,5 @@ def get_all_links_of_all_pages (url):
         all_books_url.append(url)
         
     return all_books_url   
-        
         
         
