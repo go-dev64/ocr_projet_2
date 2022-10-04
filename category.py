@@ -1,6 +1,20 @@
-import book 
 import requests
 from bs4 import BeautifulSoup
+
+
+
+
+
+def download_book_page(url):
+    """fonction de recuparation et de parsage de la page HTML
+        Args:
+            url : adresse URL d'un livre
+        Returns:
+            : contenu de la page html en question
+    """
+    reponse = requests.get(url)
+    soup = BeautifulSoup(reponse.content, "html.parser")
+    return soup , reponse
 
 def get_links_of_page(soupe):
     """recupere tous les liens des livres d'une page.
@@ -34,8 +48,8 @@ def links_all_pages(url, reponse):
     while reponse.ok:
         x += 1
         url_var = url + "page-" + str(x) + '.html'
-        reponse = book.download_book_page(url_var)[1]  
-        books_url.extend(get_links_of_page(book.download_book_page(url_var)[0]))    
+        reponse = download_book_page(url_var)[1]  
+        books_url.extend(get_links_of_page(download_book_page(url_var)[0]))    
                             
     return books_url
 
@@ -51,17 +65,16 @@ def get_all_links_of_all_pages (url):
     """
     all_books_url = []      
     url_modifie = url[:-10]
-    reponse = book.download_book_page(url_modifie + "page-1.html")[1]
+    reponse = download_book_page(url_modifie + "page-1.html")[1]
     
     if reponse.ok:
-        all_books_url.extend(links_all_pages(url= url_modifie, reponse= book.download_book_page(url_modifie)[1]))
+        all_books_url.extend(links_all_pages(url= url_modifie, reponse= download_book_page(url_modifie)[1]))
                
     else:  
-        all_books_url.extend(get_links_of_page(soupe=book.download_book_page(url)[0]))
+        all_books_url.extend(get_links_of_page(soupe=download_book_page(url)[0]))
         
     return all_books_url   
         
         
 
         
-print(len(get_all_links_of_all_pages(book.url)))

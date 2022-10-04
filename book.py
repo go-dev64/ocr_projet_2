@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import category
 
 
-url ="https://books.toscrape.com/catalogue/category/books/fiction_10/index.html"
+url ="http://books.toscrape.com/catalogue/category/books/travel_2/index.html"
 
 def download_book_page(url):
     """fonction de recuparation et de parsage de la page HTML
