@@ -1,20 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-
-
-
-
-
-def download_book_page(url):
-    """fonction de recuparation et de parsage de la page HTML
-        Args:
-            url : adresse URL d'un livre
-        Returns:
-            : contenu de la page html en question
-    """
-    reponse = requests.get(url)
-    soup = BeautifulSoup(reponse.content, "html.parser")
-    return soup , reponse
+import utile
 
 def get_links_of_page(soupe):
     """recupere tous les liens des livres d'une page.
@@ -48,8 +34,8 @@ def links_all_pages(url, reponse):
     while reponse.ok:
         x += 1
         url_var = url + "page-" + str(x) + '.html'
-        reponse = download_book_page(url_var)[1]  
-        books_url.extend(get_links_of_page(download_book_page(url_var)[0]))    
+        reponse = utile.download_book_page(url_var)[1]  
+        books_url.extend(get_links_of_page(utile.download_book_page(url_var)[0]))    
                             
     return books_url
 
@@ -65,15 +51,15 @@ def get_all_links_of_all_pages (url):
     """
     all_books_url = []      
     url_modifie = url[:-10]
-    reponse = download_book_page(url_modifie + "page-1.html")[1]
+    reponse = utile.download_book_page(url_modifie + "page-1.html")[1]
     
     if reponse.ok:
         """verifie si plusieurs pages sont disponible, et les parcours pour retourner les liens des livres de chaque pages"""
-        all_books_url.extend(links_all_pages(url= url_modifie, reponse= download_book_page(url_modifie)[1]))
+        all_books_url.extend(links_all_pages(url= url_modifie, reponse= utile.download_book_page(url_modifie)[1]))
     
-    elif download_book_page(url)[0].find("ol", class_="row"):
+    elif utile.download_book_page(url)[0].find("ol", class_="row"):
         """verifie si il y a des liens de livres sur la page et retournent tous les liens de cette page. """
-        all_books_url.extend(get_links_of_page(soupe=download_book_page(url)[0]))
+        all_books_url.extend(get_links_of_page(soupe= utile.download_book_page(url)[0]))
         
     else:   
         """retournent le lien d'un livre""" 

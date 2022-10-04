@@ -1,24 +1,16 @@
 import requests
 from bs4 import BeautifulSoup
 import category
+import utile
 
 
 url ="http://books.toscrape.com/catalogue/category/books/historical-fiction_4/index.html"
 
-def download_book_page(url):
-    """fonction de recuparation et de parsage de la page HTML
-        Args:
-            url : adresse URL d'un livre
-        Returns:
-            : contenu de la page html en question
-    """
-    reponse = requests.get(url)
-    soup = BeautifulSoup(reponse.content, "html.parser")
-    return soup
+
 
 
 def scrap_book(url):
-    soup = download_book_page(url)
+    soup = utile.download_book_page(url)[0]
        
     def th():
         
@@ -26,7 +18,6 @@ def scrap_book(url):
                 Returns:
                 : 1 dictionnaire contenant les information du livres (UPC, prix avec taxes, prix sans taxe, nombre disponible)
         """
-        soup = download_book_page(url)
         key_of_obj = []
         value_of_obj = []
         for element in soup.find('table', class_ ='table table-striped').find_all('th'):
