@@ -7,6 +7,15 @@ import utile
 url ="http://books.toscrape.com/catalogue/category/books/historical-fiction_4/index.html"
 
 
+def img ():
+        
+        '''recuperation de l'url relative de la couverture du livre et convertion en url absolue''' 
+        image = list(soup.find("div", class_= "item active").find('img')['src'])
+        del image[0:6]
+        image_url_absolu = "http://books.toscrape.com/"+"".join(image)  
+        return image_url_absolu 
+    
+
 
 
 def scrap_book(url):
@@ -26,16 +35,6 @@ def scrap_book(url):
           value_of_obj.append(element.string)
         result = {x: y for x, y in zip(key_of_obj, value_of_obj)}
         return result
-    
-       
-    def img ():
-        
-        '''recuperation de l'url relative de la couverture du livre et convertion en url absolue''' 
-        image = list(soup.find("div", class_= "item active").find('img')['src'])
-        del image[0:6]
-        image_url_absolu = "http://books.toscrape.com/"+"".join(image)  
-        return image_url_absolu 
-    
     result = th() 
     
     """creation du dictionnaire de données du livre dict_data"""
