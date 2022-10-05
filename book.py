@@ -46,7 +46,8 @@ def scrap_book(url):
                 "product_description": soup.h2.find_next("p").text,
                 "category": soup.find("ul", class_="breadcrumb").find_all("a")[2].string,
                 "review_rating" : soup.find_all("p", class_="star-rating")[0]["class"][1],
-                "image_url": img(url)}
+                "image_url": img(url)
+                }
     print(dict_data)
     return dict_data
 
