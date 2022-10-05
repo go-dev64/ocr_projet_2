@@ -4,7 +4,7 @@ import category
 import utile
 
 
-url ="http://books.toscrape.com/catalogue/category/books/historical-fiction_4/index.html"
+url ="http://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html"
    
 def data_of_table_part(url):  
     soup = utile.download_book_page(url)[0] 
@@ -32,6 +32,16 @@ def img (url):
     return image_url_absolu 
 
 
+def download_img(url_img, name):
+    """tlechargement de l image du livre"""    
+    with open (name + ".jpg", "wb") as f:
+        response = requests.get(url_img)
+        f.write(response.content) 
+        print("download " + name + ".jpg successful")
+
+
+
+
 def scrap_book(url):    
     result = data_of_table_part(url)
     soup = utile.download_book_page(url)[0]
@@ -48,19 +58,18 @@ def scrap_book(url):
                 "review_rating" : soup.find_all("p", class_="star-rating")[0]["class"][1],
                 "image_url": img(url)
                 }
-    print(dict_data)
-    return dict_data
-
-
-
+    return dict_data 
+    
+    
 
 def all_books (url):
+    all_books = category.get_all_links_of_all_pages(url)
     list_of_books = []
-    for book in category.get_all_links_of_all_pages(url):
+    for book in all_books:
         list_of_books.append(scrap_book(book))
-        print(book)
+           
     print(len(list_of_books))    
     return list_of_books
 
 
-all_books(url)
+download_img(url_img="http://books.toscrape.com/media/cache/fe/72/fe72f0532301ec28892ae79a629a293c.jpg", name="toto" )
