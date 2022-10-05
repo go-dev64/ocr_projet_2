@@ -1,8 +1,11 @@
 import csv
 import book as b
+import os
+import category as cat
+       
 
-def export_csv():
-        list_of_books = b.all_books (b.url)
+def create_csv_file(list):
+        list_of_books = list    #b.all_books (b.url)
         """ creer un fichiers csv avec les data de chaque livre.
                 data_ book = b.all_books (b.url)
                 un fichiers csv par category
@@ -41,7 +44,20 @@ def export_csv():
         
       
 
-      
-
-
-
+def tri(categories, books):
+        list_category = categories
+        list_books = books
+        for element in list_category:
+                books_of_element = []
+                for book in list_books:
+                        if book['category'] == element:
+                                books_of_element.append(book)    
+                if len(books_of_element) > 0:
+                        os.chdir("Data/" + element)
+                        create_csv_file(books_of_element)
+                        os.chdir("../../")
+                
+                
+tri(categories=cat.category(), books=b.all_books (b.url))
+                
+                
