@@ -29,7 +29,8 @@ def create_csv_file(list):
         
                 for book in list_of_books:
                         ligne_book = [book["product_page_url"],
-                                      book["upc"], book["title"],
+                                      book["upc"],
+                                      book["title"],
                                       book["price_including_tax"],
                                       book["price_excluding_tax"],
                                       book["number_available"],
@@ -39,6 +40,7 @@ def create_csv_file(list):
                                       book["image_url"]
                                       ]    
                         writer.writerow(ligne_book)
+                        b.download_img(url_img=book["image_url"], name=book["title"])
         
         print("Le fichier :" + b.all_books(b.url)[0]["category"] + ".csv est créé")
         

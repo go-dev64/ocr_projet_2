@@ -4,7 +4,7 @@ import category
 import utile
 
 
-url ="http://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html"
+url ="http://books.toscrape.com/catalogue/full-moon-over-noahs-ark-an-odyssey-to-mount-ararat-and-beyond_811/index.html"
    
 def data_of_table_part(url):  
     soup = utile.download_book_page(url)[0] 
@@ -32,24 +32,24 @@ def img (url):
     return image_url_absolu 
 
 
-def download_img(url_img, name):
-    """tlechargement de l image du livre"""    
-    with open (name + ".jpg", "wb") as f:
+def download_img(url_img, name): 
+    """telechargement de l image du livre"""    
+    
+    title_name = utile.replace_special_caractere(name)
+    with open (title_name + ".jpg", "wb") as f:
         response = requests.get(url_img)
         f.write(response.content) 
         print("download " + name + ".jpg successful")
+     
 
-
-
-
-def scrap_book(url):    
+def scrap_book(url):  
+    """creation du dictionnaire de données du livre dict_data"""    
+    
     result = data_of_table_part(url)
     soup = utile.download_book_page(url)[0]
-    """creation du dictionnaire de données du livre dict_data"""
-
     dict_data = {"product_page_url": url,
                 "upc" : result["UPC"],
-                "title": soup.h1.string,
+                "title" : soup.h1.string,
                 "price_including_tax" : result["Price (incl. tax)"].replace("Â",""),
                 "price_excluding_tax" : result["Price (excl. tax)"].replace("Â",""),
                 "number_available" : int(''.join([str(i) for i in result["Availability"] if i.isnumeric()])),
@@ -68,8 +68,7 @@ def all_books (url):
     for book in all_books:
         list_of_books.append(scrap_book(book))
            
-    print(len(list_of_books))    
+    print(len(list_of_books)+"livres traités")    
     return list_of_books
 
-
-download_img(url_img="http://books.toscrape.com/media/cache/fe/72/fe72f0532301ec28892ae79a629a293c.jpg", name="toto" )
+    

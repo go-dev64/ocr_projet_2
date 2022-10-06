@@ -84,4 +84,4 @@ def creating_folders_by_category():
     
     print("Un dossier pour chaque categories a été crée dans le repertoire :Data")
 
-
+creating_folders_by_category()

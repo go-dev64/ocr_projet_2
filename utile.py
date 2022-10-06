@@ -15,3 +15,12 @@ def download_book_page(url):
     reponse = requests.get(url)
     soup = BeautifulSoup(reponse.content, "html.parser")
     return soup , reponse
+
+
+def replace_special_caractere(my_str):
+    special_caractere = "}’éè{!@#$%^&*()[]};,./<>?\|`~-=_+:"
+    for element in special_caractere:
+        my_str = my_str.replace(element, "_")
+    return my_str
+
+
