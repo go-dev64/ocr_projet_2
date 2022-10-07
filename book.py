@@ -4,7 +4,7 @@ import category
 import utile
 
 
-url ="http://books.toscrape.com/catalogue/full-moon-over-noahs-ark-an-odyssey-to-mount-ararat-and-beyond_811/index.html"
+url ="http://books.toscrape.com/catalogue/category/books_1/index.html"
    
 def data_of_table_part(url):  
     soup = utile.download_book_page(url)[0] 
@@ -24,7 +24,7 @@ def data_of_table_part(url):
 
 
 def img (url):   
-    '''recuperation de l'url relative de la couverture du livre et convertion en absolue''' 
+    '''recuperation de l'url relative de la couverture du livre et convertion en absolue'''
     
     image = list(utile.download_book_page(url)[0].find("div", class_= "item active").find('img')['src'])
     del image[0:6]
@@ -53,22 +53,25 @@ def scrap_book(url):
                 "price_including_tax" : result["Price (incl. tax)"].replace("Â",""),
                 "price_excluding_tax" : result["Price (excl. tax)"].replace("Â",""),
                 "number_available" : int(''.join([str(i) for i in result["Availability"] if i.isnumeric()])),
-                "product_description": soup.h2.find_next("p").text,
+                "product_description": soup.h2.find_next("p").text,  # replace("‽","_").replace(" ","_")
                 "category": soup.find("ul", class_="breadcrumb").find_all("a")[2].string,
                 "review_rating" : soup.find_all("p", class_="star-rating")[0]["class"][1],
                 "image_url": img(url)
                 }
+    print("dict_data of" , dict_data["title"])
     return dict_data 
     
     
 
-def all_books (url):
+def all_dictionnary(url):
     all_books = category.get_all_links_of_all_pages(url)
+    print(all_books)
+    print(len(all_books))
     list_of_books = []
     for book in all_books:
         list_of_books.append(scrap_book(book))
-           
-    print(len(list_of_books)+"livres traités")    
+        print(len(list_of_books),":livres traités")   
+    print(len(list_of_books),":livres traités")    
     return list_of_books
 
-    
+

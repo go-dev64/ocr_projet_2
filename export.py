@@ -22,7 +22,7 @@ def create_csv_file(list):
                    "image_url"
                    ]
 
-        with open (list_of_books[0]["category"] + ".csv", "w") as f:
+        with open (list_of_books[0]["category"] + ".csv", "w", encoding="UTF-16LE") as f:
         
                 writer = csv.writer(f, delimiter= ',')
                 writer.writerow(en_tete)
@@ -39,27 +39,35 @@ def create_csv_file(list):
                                       book["review_rating"],
                                       book["image_url"]
                                       ]    
+                        print(ligne_book)
                         writer.writerow(ligne_book)
                         b.download_img(url_img=book["image_url"], name=book["title"])
         
-        print("Le fichier :" + b.all_books(b.url)[0]["category"] + ".csv est créé")
+        print("Le fichier :" + list_of_books[0]["category"] + ".csv est créé")
         
       
 
-def tri(categories, books):
-        list_category = categories
-        list_books = books
+def tri():
+        
+        list_category = cat.category()
+        list_books = b.all_dictionnary (b.url)
+        
+        print("tot",list_category)
+        print("lolo:",list_books, len(list_books))
+        
         for element in list_category:
                 books_of_element = []
+                print(element)
+                
                 for book in list_books:
                         if book['category'] == element:
                                 books_of_element.append(book)    
+                                
                 if len(books_of_element) > 0:
                         os.chdir("Data/" + element)
                         create_csv_file(books_of_element)
                         os.chdir("../../")
+            
                 
-                
-tri(categories=cat.category(), books=b.all_books (b.url))
-                
+   
                 

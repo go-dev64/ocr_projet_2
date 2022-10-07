@@ -12,7 +12,9 @@ def get_links_of_page(soupe):
     """
     links = []   
     for i in soupe.find_all('h3'):
-        links.append("http://books.toscrape.com/catalogue" + i.find("a")['href'][8:])
+        href = i.find("a")['href']
+        book_name = href.split("/").pop(-2)
+        links.append("http://books.toscrape.com/catalogue/" + book_name+ "/index.html")  
     return links                     
                                
                
@@ -25,14 +27,15 @@ def links_all_pages(url, reponse):
     Returns:
         une liste contenant tous les liens des livres. books_url
     """
-    links_of_books_pages = []      
+    links_of_books_pages = []    
     x = 0
     while reponse.ok:
         x += 1
         url_var = url + "page-" + str(x) + '.html'
-        reponse = utile.download_book_page(url_var)[1]  
-        links_of_books_pages.extend(get_links_of_page(utile.download_book_page(url_var)[0]))    
-                                 
+        reponse = utile.download_book_page(url_var)[1]          
+        links_of_books_pages.extend(get_links_of_page(utile.download_book_page(url_var)[0]))                               
+    print(links_of_books_pages)
+    print(len(links_of_books_pages))
     return links_of_books_pages
 
 
@@ -60,7 +63,6 @@ def get_all_links_of_all_pages(url):
     else:   
         """retournent le lien d'un livre""" 
         all_books_url.append(url)
-        
     return all_books_url   
         
         
@@ -69,7 +71,7 @@ def category():
     categories = soup.find("ul", class_= 'nav').find("ul").find_all("a")
     all_category = []
     for category in categories:
-        all_category.append(category.string.strip())
+        all_category.append(category.string.strip())   
     return all_category 
       
       
@@ -85,3 +87,5 @@ def creating_folders_by_category():
     print("Un dossier pour chaque categories a été crée dans le repertoire :Data")
 
 creating_folders_by_category()
+
+
