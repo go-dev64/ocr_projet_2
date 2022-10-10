@@ -69,5 +69,5 @@ def tri():
                         os.chdir("../../")
             
                 
-   
+tri()
                 

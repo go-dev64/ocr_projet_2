@@ -18,7 +18,7 @@ def download_book_page(url):
 
 
 def replace_special_caractere(my_str):
-    special_caractere = "} ’{!@#$%^&*'()¨^\[]};,./<>?\|`~-=_+:‽"
+    special_caractere = "}’{!@#$%^&*'()¨^\[]};,./<>?\|`~-=_+:‽"
     for element in special_caractere:
         my_str = my_str.replace(element, "_").replace("é","e").replace("è","e").replace('"'," ")
     return my_str

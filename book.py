@@ -53,7 +53,7 @@ def scrap_book(url):
                 "price_including_tax" : result["Price (incl. tax)"].replace("Â",""),
                 "price_excluding_tax" : result["Price (excl. tax)"].replace("Â",""),
                 "number_available" : int(''.join([str(i) for i in result["Availability"] if i.isnumeric()])),
-                "product_description": soup.h2.find_next("p").text,  # replace("‽","_").replace(" ","_")
+                "product_description": soup.h2.find_next("p").text, 
                 "category": soup.find("ul", class_="breadcrumb").find_all("a")[2].string,
                 "review_rating" : soup.find_all("p", class_="star-rating")[0]["class"][1],
                 "image_url": img(url)
