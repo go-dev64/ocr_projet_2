@@ -63,5 +63,3 @@ def tri():
                 create_csv_file(books_of_element)
                 os.chdir("../../")
 
-
-tri()
