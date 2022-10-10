@@ -1,8 +1,7 @@
+# utile
+
 import requests
 from bs4 import BeautifulSoup
-
-
-
 
 
 def download_book_page(url):
@@ -14,13 +13,12 @@ def download_book_page(url):
      """
     reponse = requests.get(url)
     soup = BeautifulSoup(reponse.content, "html.parser")
-    return soup , reponse
+    return soup, reponse
 
 
 def replace_special_caractere(my_str):
-    special_caractere = "}’{!@#$%^&*'()¨^\[]};,./<>?\|`~-=_+:‽"
+    special_caractere = "}’{!@#$%^&*'()¨^\[]};,./<>?|`~-=_+:‽"
     for element in special_caractere:
-        my_str = my_str.replace(element, "_").replace("é","e").replace("è","e").replace('"'," ")
+        my_str = my_str.replace(element, "_").replace(
+            "é", "e").replace("è", "e").replace('"', " ")
     return my_str
-
-
