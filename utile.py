@@ -9,7 +9,8 @@ def download_book_page(url):
         Args:
             url : adresse URL d'un livre
         Returns:
-            : contenu de la page html en question
+            soup : contenu de la page html en question
+            response :
      """
     reponse = requests.get(url)
     soup = BeautifulSoup(reponse.content, "html.parser")

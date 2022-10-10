@@ -29,6 +29,10 @@ def data_of_table_part(url):
     result = {x: y for x, y in zip(key_of_obj, value_of_obj)}
     return result
 
+def get_domain(url):
+    # TODO: implémenter la fonction
+    domain_url = url
+    return domain_url
 
 def img(url):
     '''recuperation de l'url relative de la couverture
@@ -38,7 +42,7 @@ def img(url):
                  .find("div", class_="item active")
                  .find('img')['src'])
     del image[0:6]
-    image_url_absolu = "http://books.toscrape.com/"+"".join(image)
+    image_url_absolu = get_domain(url) + str(image)
     return image_url_absolu
 
 
