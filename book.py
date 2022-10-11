@@ -50,7 +50,7 @@ def download_img(url_img, name):
 
 
 def scrap_book(url):
-    """creation of the book information dictionary"""
+    """creating of the book information dictionary"""
 
     result = data_of_table_part(url)
     soup = utile.download_book_page(url)[0]
@@ -75,6 +75,14 @@ def scrap_book(url):
 
 
 def all_dictionnary(url):
+    """creating of list of information dictionnary for all books
+
+    Args:
+        url (_type_): url
+
+    Returns:
+        _type_: list of books information dictionnary
+    """
     all_books = category.select_case_of_application(url)
     list_of_books = []
     for book in all_books:
