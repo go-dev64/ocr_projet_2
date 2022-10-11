@@ -1,4 +1,9 @@
-# Module category
+"""Module category: 
+    - list of categories
+   - creating categories folders.
+   - recovery of book url links(book, category, site)
+"""
+
 
 import utile
 import os
@@ -11,7 +16,7 @@ def get_url_books_from_a_single_page(soupe, url):
     Returns:
         list of links of books from a page.
     """
-    url_domaine = utile.url_domaine(url)
+    url_domaine = utile.name_of_domain(url)
     list_of_books_from_single_page = []
     for i in soupe.find_all("h3"):
         href = i.find("a")["href"]
@@ -108,7 +113,7 @@ def creating_folders_by_categories():
         if not os.path.exists("Data/" + i):
             os.makedirs("Data/" + i)
 
-    print("Un dossier de chaque categories a été crée dans le rep :Data")
+    print("Les dossiers categories ont été créés dans le rep :Data")
 
 
 # creating_folders_by_categories()

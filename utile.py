@@ -1,4 +1,4 @@
-# utile
+# Module of recursive function
 
 import requests
 from bs4 import BeautifulSoup
@@ -37,8 +37,8 @@ def name_of_domain(url):
     Return:
         Url of domaine("http://books.toscrape.com/catalogue/")
     """
-    
     url_domain = url[:36]
     
     return url_domain
+
 
