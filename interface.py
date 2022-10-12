@@ -2,6 +2,11 @@ import utile
 
 
 def get_list_categories():
+    """get categories list and list of url of categories pages
+
+    Returns:
+        list of url categories and list of categories names
+    """
     soup = utile.download_book_page(
         "http://books.toscrape.com/catalogue/category/books_1/index.html"
     )[0]
@@ -15,6 +20,14 @@ def get_list_categories():
 
 
 def category_choice(list_names):
+    """return the index of category chosen by user
+
+    Args:
+        list_names (_type_): list of names of categories
+
+    Returns:
+        _type_: index of category chosen by user
+    """
 
     list_names = list_names
     for i in list_names:
@@ -27,6 +40,15 @@ def category_choice(list_names):
 
 
 def url_category(number_of_category, list_url):
+    """ return url of category chosen by user
+
+    Args:
+        number_of_category (_type_): _description_
+        list_url (_type_): _description_
+
+    Returns:
+        _type_: url of category chosen
+    """
     list_url = list_url
     url_domain = "http://books.toscrape.com/catalogue/category"
     url_of_the_chosen_category = url_domain + list_url[number_of_category]
@@ -35,6 +57,11 @@ def url_category(number_of_category, list_url):
 
 
 def user_choice():
+    """user choice interface
+
+    Returns:
+        _type_: url chosen by user(book, category or site)
+    """
     list_of_url_categories = get_list_categories()[0]
     list_of_name_of_categories = get_list_categories()[1]
     choice = int(
@@ -47,11 +74,20 @@ def user_choice():
     )
 
     if choice == 1:
+        """ choice of one book
+        Returns:
+            _type_: url of book chosen
+        """
         url_livre = input("Veuillez renseigner l'url du livre :")
         print("Export du livre en cours...")
         return url_livre
 
     elif choice == 2:
+        """choice of category
+
+        Returns:
+            _type_:return url of category chosen
+        """
         choice_of_category = category_choice(
             list_names=list_of_name_of_categories
         )
@@ -61,10 +97,14 @@ def user_choice():
         )
 
         print("Export de la categorie: "
-              + list_of_name_of_categories[choice_of_category] + " en cours...")
+              + list_of_name_of_categories[choice_of_category]
+              + " en cours...")
         return url_of_category
 
     else:
+        """choice of site
+        return l url of site
+        """
         url_site = "http://books.toscrape.com/catalogue/category/books_1/index.html"
         print("Export du site en cours...")
         return url_site
