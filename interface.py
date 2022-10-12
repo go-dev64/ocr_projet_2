@@ -29,9 +29,7 @@ def category_choice(list_names):
 def url_category(number_of_category, list_url):
     list_url = list_url
     url_domain = "http://books.toscrape.com/catalogue/category"
-    print(list_url[number_of_category])
     url_of_the_chosen_category = url_domain + list_url[number_of_category]
-    print(url_of_the_chosen_category)
 
     return url_of_the_chosen_category
 

@@ -38,7 +38,6 @@ def name_of_domain(url):
         Url of domaine("http://books.toscrape.com/catalogue/")
     """
     url_domain = url[:36]
-    print(url_domain)
     return url_domain
 
 
