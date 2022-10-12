@@ -1,12 +1,13 @@
 import category
 import book
 import export
+import interface
 
 
-url_page = "http://books.toscrape.com/catalogue/category/books/mystery_3/index.html"
-
-
-def main(url):
+def main():
+    
+    url_chosen = interface.user_choice()
+    print("url choisie" ,url_chosen)
     category.creating_folders_by_categories()
     """Creating Data directory and folder categories
     in the current work directory"""
@@ -14,7 +15,7 @@ def main(url):
     list_category = category.category()
     # get list of categories.
 
-    list_of_book = book.all_dictionnary(url=url)
+    list_of_book = book.all_dictionnary(url=url_chosen)
     # get list of data of books or one book.
 
     export.export(categories=list_category, books=list_of_book)
@@ -22,4 +23,4 @@ def main(url):
 
 
 if __name__ == "__main__":
-    main(url=url_page)
+    main()

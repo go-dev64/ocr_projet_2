@@ -17,11 +17,11 @@ def data_of_table_part(url):
 
     key_of_obj = []
     value_of_obj = []
-    for element in soup.find("table",
-                             class_="table table-striped").find_all("th"):
+    for element in soup.find(
+        "table",class_="table table-striped").find_all("th"):
         key_of_obj.append(element.string)
-    for element in soup.find("table",
-                             class_="table table-striped").find_all("td"):
+    for element in soup.find(
+        "table", class_="table table-striped").find_all("td"):
         value_of_obj.append(element.string)
     result = {x: y for x, y in zip(key_of_obj, value_of_obj)}
     return result
