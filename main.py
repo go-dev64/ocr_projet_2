@@ -5,9 +5,8 @@ import interface
 
 
 def main():
-    
+
     url_chosen = interface.user_choice()
-    print("url choisie" ,url_chosen)
     category.creating_folders_by_categories()
     """Creating Data directory and folder categories
     in the current work directory"""
