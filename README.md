@@ -146,7 +146,7 @@ Entrer le numéro de la catégorie choisie :
 Par exemple taper 4 et appuyer sur "Entrer" pour exporter la catégorie _"Classics"_.
 
 
-L'application lancera l'export des données de tou les livres de la catégorie. 
+L'application lancera l'export des données de chaque livre de la catégorie. 
 
 
 ### _Exemple pour l'export de tous les livres du site_
