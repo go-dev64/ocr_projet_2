@@ -34,7 +34,8 @@ def category_choice(list_names):
         print(i, "=", list_names.index(i), end=" ; ")
 
     choice_of_category = int(
-        input("\nEntrer le numero de la catégorie choisie et appuyer sur Entrer :"))
+        input("\nEntrer le numero de la catégorie choisie et"
+              "appuyer sur Entrer :"))
     print("Vous avez choisi la categorie : " + list_names[choice_of_category])
     return choice_of_category
 
@@ -50,8 +51,8 @@ def url_category(number_of_category, list_url):
         _type_: url of category chosen
     """
     list_url = list_url
-    url_domain = "http://books.toscrape.com/catalogue/category"
-    url_of_the_chosen_category = url_domain + list_url[number_of_category]
+    URL_DOMAIN = "http://books.toscrape.com/catalogue/category"
+    url_of_the_chosen_category = URL_DOMAIN + list_url[number_of_category]
 
     return url_of_the_chosen_category
 
@@ -78,7 +79,8 @@ def user_choice():
         Returns:
             _type_: url of book chosen
         """
-        url_livre = input("Veuillez renseigner l'url du livre et appuyer sur Entrer :")
+        url_livre = input("Veuillez renseigner l'url du livre et"
+                          "appuyer sur Entrer :")
         print("Export du livre en cours...")
         return url_livre
 
@@ -105,6 +107,8 @@ def user_choice():
         """choice of site
         return l url of site
         """
-        url_site = "http://books.toscrape.com/catalogue/category/books_1/index.html"
+        URL_SITE = ("http://books.toscrape.com/"
+                    "catalogue/category/books_1/index.html"
+                    )
         print("Export du site en cours...")
-        return url_site
+        return URL_SITE

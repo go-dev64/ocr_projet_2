@@ -1,4 +1,4 @@
-"""Module category: 
+"""Module category:
     - list of categories
    - creating categories folders.
    - recovery of book url links(book, category, site)

@@ -46,8 +46,8 @@ def create_csv_file(list):
             b.download_img(url_img=book["image_url"], name=book["title"])
 
     print("Creation du fichier: "
-            + list_of_books[0]["category"]
-            + ".csv dans le dossier: " + os. getcwd())
+          + list_of_books[0]["category"]
+          + ".csv dans le dossier: " + os. getcwd())
 
 
 def export(categories, books):
