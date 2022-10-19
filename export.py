@@ -51,7 +51,7 @@ def create_csv_file(list):
 
 
 def export(categories, books):
-    """tri functionn"""
+    """export by category"""
     list_category = categories
     list_books = books
     for element in list_category:

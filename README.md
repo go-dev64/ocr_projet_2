@@ -10,7 +10,7 @@
 
 <center>
 
-![Logo de Books Online.](/image/1600779540759_Online%20bookstore-01.png "Logo de Books Online.")
+![Logo de Books Online.](https://raw.githubusercontent.com/go-dev64/ocr_projet_2/main/image/1600779540759_Online%20bookstore-01.png "Logo de Books Online.")
 # Books Online
 
 </center>

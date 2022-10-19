@@ -34,7 +34,7 @@ def category_choice(list_names):
         print(i, "=", list_names.index(i), end=" ; ")
 
     choice_of_category = int(
-        input("\nEntrer le numero de la catégorie choisie et"
+        input("\nEntrer le numero de la catégorie choisie et "
               "appuyer sur Entrer :"))
     print("Vous avez choisi la categorie : " + list_names[choice_of_category])
     return choice_of_category
